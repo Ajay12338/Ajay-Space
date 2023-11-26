@@ -174,7 +174,7 @@ const generateSubCard = (currId) => {
     repliesStr += `
     <hr>
     <div class="sub-tweets">
-      <img src="${reply.profilePic}">
+      <img src="${reply.profilePic}" id="img-subtweet-${generateUserUUID()}">
       <div>
         <p>${reply.handle}</p>
         <p>${reply.tweetText}</p>
