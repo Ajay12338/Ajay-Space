@@ -1,47 +1,18 @@
 import { tweetsData } from "./data.js";
+import { generateUserUUID } from "./generate_uuid.js";
+import { themes } from "./themes.js";
 
-let usersUUID = [];
-let initialStrings = ["abc", "cdf", "gfg", "xyz"];
 const tweetBtn = document.getElementById("tweet-btn");
 const textAreaInput = document.getElementById("tweet-input");
 const parentBody = document.getElementById("body");
 const toggleBtn = document.getElementById("toggle-btn");
 const closeModal = document.getElementById("clear-modal");
-const themes = (theme) => {
-  if (theme === "dark") {
-    document.getElementById("body-main").style.backgroundColor = "#000000";
-    document.getElementById("body-main").style.color = "#ffffff";
-    document.getElementById("tweet-input").classList.add("text-area-dark");
-  } else {
-    document.getElementById("body-main").style.backgroundColor = "#ffffff";
-    document.getElementById("body-main").style.color = "#000000";
-    document.getElementById("tweet-input").classList.remove("text-area-dark");
-  }
-};
+const postBtn = document.getElementById("post-btn-twt");
+
 if (toggleBtn.checked) themes("dark");
 toggleBtn.addEventListener("click", () => {
-  if (toggleBtn.checked) {
-    themes("dark");
-  } else {
-    themes("light");
-  }
+  toggleBtn.checked ? themes("dark") : themes("light");
 });
-
-const generateUserUUID = () => {
-  let randomNumber = Math.floor(Math.random() * 100000000000000);
-  let randomString =
-    initialStrings[Math.floor(Math.random() * initialStrings.length)];
-  let uuId = randomString + randomNumber;
-
-  while (usersUUID.includes(uuId)) {
-    randomNumber = Math.floor(Math.random() * 100000000000000);
-    randomString =
-      initialStrings[Math.floor(Math.random() * initialStrings.length)];
-    uuId = randomString + randomNumber;
-  }
-  usersUUID.push(uuId);
-  return uuId;
-};
 
 const generateUserCardAndRender = () => {
   let userDivText = "";
@@ -210,6 +181,7 @@ closeModal.addEventListener("click", () => {
   document.getElementById("transparent-bg").style.display = "none";
   document.getElementById("body-main").style.overflow = "visible";
 });
+postBtn.addEventListener("click", () => {});
 parentBody.addEventListener("click", handleClicks);
 tweetBtn.addEventListener("click", generateUserCardAndRender);
 staticBody();

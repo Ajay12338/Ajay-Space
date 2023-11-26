@@ -26,7 +26,8 @@ textarea {
   color: aquamarine;
   background-color: black;
 }
-#tweet-btn {
+#tweet-btn,
+.twt-btn {
   width: 35%;
   padding: 5px;
   border-radius: 20px;
@@ -135,4 +136,70 @@ hr {
   background-color: white;
   color: black;
   border: 1px solid red;
+}
+.main-side-bar {
+  margin: 20px auto;
+  display: flex;
+  height: 80%;
+  width: 600px;
+  justify-content: center;
+  position: absolute;
+}
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.side-bar > i {
+  margin: 10px;
+}
+.hide-tab {
+  display: block;
+}
+@media only screen and (min-width: 768px) and (max-width: 1400px) {
+  .main-side-bar {
+    position: fixed;
+    justify-content: center;
+    width: 100%;
+    height: 11%;
+    background-color: rgba(0, 0, 0, 1);
+    border-top: 2px solid rgba(255, 255, 255, 0.7);
+    bottom: 0;
+    margin: 0;
+  }
+  .side-bar {
+    width: 80%;
+    flex-direction: row;
+  }
+  .hide-tab {
+    display: none;
+  }
+}
+@media only screen and (max-width: 767px) {
+  /* Have to Mobile device */
+  .main-side-bar {
+    position: fixed;
+    justify-content: center;
+    width: 100%;
+    height: 11%;
+    background-color: rgba(0, 0, 0, 1);
+    border-top: 2px solid rgba(255, 255, 255, 0.7);
+    bottom: 0;
+    margin: 0;
+  }
+  .side-bar {
+    width: 80%;
+    flex-direction: row;
+  }
+  .side-bar > i {
+    font-size: 1rem;
+  }
+  .hide-tab {
+    display: none;
+  }
+  body {
+    font-size: 0.5rem;
+    font-weight: 800;
+  }
 }
