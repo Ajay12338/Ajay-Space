@@ -6,7 +6,6 @@ const tweetBtn = document.getElementById("tweet-btn");
 const textAreaInput = document.getElementById("tweet-input");
 const parentBody = document.getElementById("body");
 const toggleBtn = document.getElementById("toggle-btn");
-const isRepliesToggled = false;
 
 const themes = (theme) => {
   if (theme === "dark") {
