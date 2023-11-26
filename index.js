@@ -6,7 +6,7 @@ const tweetBtn = document.getElementById("tweet-btn");
 const textAreaInput = document.getElementById("tweet-input");
 const parentBody = document.getElementById("body");
 const toggleBtn = document.getElementById("toggle-btn");
-
+const closeModal = document.getElementById("clear-modal");
 const themes = (theme) => {
   if (theme === "dark") {
     document.getElementById("body-main").style.backgroundColor = "#000000";
@@ -26,6 +26,7 @@ toggleBtn.addEventListener("click", () => {
     themes("light");
   }
 });
+
 const generateUserUUID = () => {
   let randomNumber = Math.floor(Math.random() * 100000000000000);
   let randomString =
@@ -88,7 +89,7 @@ const generateCard = (userId, msg, imageId, uuid, userInfo) => {
   return `
     <div class="cards">
         <div class="cards-inner-txt">
-            <img src="${imageId}" alt="Scimbalogo" /> 
+            <img src="${imageId}" id="img-${uuid}" alt="Scimbalogo" /> 
             <div class="cards-inner-txt-txt">
                 <p>${userId}</p>
                 <p>${msg}</p>
@@ -123,6 +124,7 @@ const setColorAndChangeStyle = (
   document.getElementById(currId).classList.add(addStyle);
   document.getElementById(currId).classList.remove(removeStyle);
 };
+
 const toggleLikeOrRetweet = (currId, type) => {
   const currentUuid = currId.substr(type.length + 1);
   const currObj = fetchCurrentObject(currentUuid);
@@ -164,6 +166,7 @@ const toggleLikeOrRetweet = (currId, type) => {
     currObj.isRetweeted = !currObj.isRetweeted;
   }
 };
+
 const generateSubCard = (currId) => {
   const currObj = fetchCurrentObject(currId.substr("comment-".length));
   let repliesStr = "";
@@ -180,7 +183,14 @@ const generateSubCard = (currId) => {
   }
   return repliesStr;
 };
-parentBody.addEventListener("click", (e) => {
+const generateImageModal = (src) => {
+  document.getElementById("transparent-bg").style.display = "flex";
+  document.getElementById("img-modal").style.background = `url("${src}")`;
+  document.getElementById("img-modal").style.backgroundSize = "cover";
+  document.getElementById("img-modal").style.backgroundPosition = "center";
+  document.getElementById("body-main").style.overflow = "hidden";
+};
+const handleClicks = (e) => {
   const currId = e.target.id;
   if (currId.includes("comment")) {
     let repliesStr = generateSubCard(currId);
@@ -190,9 +200,16 @@ parentBody.addEventListener("click", (e) => {
     document.getElementById(currDivId).classList.toggle("hide");
   } else if (currId.includes("like")) {
     toggleLikeOrRetweet(currId, "like");
-  } else {
+  } else if (currId.includes("retweet")) {
     toggleLikeOrRetweet(currId, "retweet");
+  } else if (currId.includes("img")) {
+    generateImageModal(e.target.src);
   }
+};
+closeModal.addEventListener("click", () => {
+  document.getElementById("transparent-bg").style.display = "none";
+  document.getElementById("body-main").style.overflow = "visible";
 });
+parentBody.addEventListener("click", handleClicks);
 tweetBtn.addEventListener("click", generateUserCardAndRender);
 staticBody();
