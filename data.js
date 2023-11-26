@@ -55,4 +55,22 @@ export const tweetsData = [
     isRetweeted: false,
     uuid: "8hy671sff-c0f5-4545-9c4b-1237gyys45",
   },
+  {
+    handle: `@You Suck 💎`,
+    profilePic: `images/love.png`,
+    likes: 1000,
+    retweets: 100,
+    tweetText: `Please Love Everyone Around You 😍.
+                Always Love!!!!! `,
+    replies: [
+      {
+        handle: `@Boomer 🤯`,
+        profilePic: `images/flower.png`,
+        tweetText: `No. Obviosuly not. Go get a job in McDonald's.`,
+      },
+    ],
+    isLiked: false,
+    isRetweeted: false,
+    uuid: "4b161eee-c0f5-4545-9c4b-8562944143143ee",
+  },
 ];

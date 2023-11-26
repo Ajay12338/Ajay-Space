@@ -6,9 +6,10 @@ const tweetBtn = document.getElementById("tweet-btn");
 const textAreaInput = document.getElementById("tweet-input");
 const parentBody = document.getElementById("body");
 const toggleBtn = document.getElementById("toggle-btn");
+const isRepliesToggled = false;
 
-toggleBtn.addEventListener("click", () => {
-  if (toggleBtn.checked) {
+const themes = (theme) => {
+  if (theme === "dark") {
     document.getElementById("body-main").style.backgroundColor = "#000000";
     document.getElementById("body-main").style.color = "#ffffff";
     document.getElementById("tweet-input").classList.add("text-area-dark");
@@ -16,6 +17,14 @@ toggleBtn.addEventListener("click", () => {
     document.getElementById("body-main").style.backgroundColor = "#ffffff";
     document.getElementById("body-main").style.color = "#000000";
     document.getElementById("tweet-input").classList.remove("text-area-dark");
+  }
+};
+if (toggleBtn.checked) themes("dark");
+toggleBtn.addEventListener("click", () => {
+  if (toggleBtn.checked) {
+    themes("dark");
+  } else {
+    themes("light");
   }
 });
 const generateUserUUID = () => {
@@ -89,6 +98,7 @@ const generateCard = (userId, msg, imageId, uuid, userInfo) => {
                 <i class="fa-regular fa-heart" id="like-${uuid}">   ${userInfo[1]}</i>
                 <i class="fa-solid fa-retweet" id="retweet-${uuid}">   ${userInfo[2]}</i>
             </div> 
+            <div class="main-sub-tweets hide" id="subtweet-${uuid}"></div>
             </div>  
         </div>
     </div>
@@ -155,9 +165,30 @@ const toggleLikeOrRetweet = (currId, type) => {
     currObj.isRetweeted = !currObj.isRetweeted;
   }
 };
+const generateSubCard = (currId) => {
+  const currObj = fetchCurrentObject(currId.substr("comment-".length));
+  let repliesStr = "";
+  for (const reply of currObj.replies) {
+    repliesStr += `
+    <hr>
+    <div class="sub-tweets">
+      <img src="${reply.profilePic}">
+      <div>
+        <p>${reply.handle}</p>
+        <p>${reply.tweetText}</p>
+      </div>
+    </div>`;
+  }
+  return repliesStr;
+};
 parentBody.addEventListener("click", (e) => {
   const currId = e.target.id;
   if (currId.includes("comment")) {
+    let repliesStr = generateSubCard(currId);
+    let currDivId = `subtweet-${currId.substr("comment-".length)}`;
+    let currElem = document.getElementById(currDivId);
+    currElem.innerHTML = repliesStr;
+    document.getElementById(currDivId).classList.toggle("hide");
   } else if (currId.includes("like")) {
     toggleLikeOrRetweet(currId, "like");
   } else {

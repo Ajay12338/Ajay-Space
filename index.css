@@ -87,6 +87,7 @@ hr {
   cursor: pointer;
   user-select: none;
 }
+
 .sub-tweets {
   display: flex;
   justify-content: center;
@@ -99,5 +100,6 @@ hr {
 .main-sub-tweets > hr {
   width: 100%;
 }
-.main-sub-tweets {
+.hide {
+  display: none;
 }
