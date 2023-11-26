@@ -5,7 +5,19 @@ let initialStrings = ["abc", "cdf", "gfg", "xyz"];
 const tweetBtn = document.getElementById("tweet-btn");
 const textAreaInput = document.getElementById("tweet-input");
 const parentBody = document.getElementById("body");
+const toggleBtn = document.getElementById("toggle-btn");
 
+toggleBtn.addEventListener("click", () => {
+  if (toggleBtn.checked) {
+    document.getElementById("body-main").style.backgroundColor = "#000000";
+    document.getElementById("body-main").style.color = "#ffffff";
+    document.getElementById("tweet-input").classList.add("text-area-dark");
+  } else {
+    document.getElementById("body-main").style.backgroundColor = "#ffffff";
+    document.getElementById("body-main").style.color = "#000000";
+    document.getElementById("tweet-input").classList.remove("text-area-dark");
+  }
+});
 const generateUserUUID = () => {
   let randomNumber = Math.floor(Math.random() * 100000000000000);
   let randomString =
@@ -118,7 +130,7 @@ const toggleLikeOrRetweet = (currId, type) => {
       setColorAndChangeStyle(
         currId,
         currObj.likes,
-        "#000000",
+        "#1da1f2",
         "fa-regular",
         "fa-solid"
       );
@@ -136,7 +148,7 @@ const toggleLikeOrRetweet = (currId, type) => {
       setColorAndChangeStyle(
         currId,
         currObj.retweets,
-        "#000000",
+        "#1da1f2",
         "fa-soli",
         "fa-soli"
       );

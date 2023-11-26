@@ -21,6 +21,10 @@ textarea {
   resize: none;
   margin: 0 15px;
 }
+.text-area-dark {
+  color: aquamarine;
+  background-color: black;
+}
 #tweet-btn {
   width: 35%;
   padding: 5px;
@@ -48,9 +52,13 @@ hr {
 }
 .heading {
   display: flex;
-  width: 50%;
-  justify-content: center;
-  align-content: start;
+  width: 100%;
+  justify-content: space-around;
+  align-content: center;
+}
+#toggle-btn {
+  width: 20px;
+  height: 20px;
 }
 .cards {
   display: flex;
@@ -75,6 +83,7 @@ hr {
   align-content: center;
 }
 .card-inner-txt-txt-btns > i {
+  color: #1da1f2;
   cursor: pointer;
   user-select: none;
 }
